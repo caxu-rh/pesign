@@ -61,9 +61,9 @@ err:
 	}
 	cms->signatures = signatures;
 	if (signum != cms->num_signatures) {
-		memmove(cms->signatures[signum+1],
-			cms->signatures[signum],
-			sizeof(SECItem) * (cms->num_signatures - signum));
+		memmove(&cms->signatures[signum + 1],
+			&cms->signatures[signum],
+			sizeof(SECItem *) * (cms->num_signatures - signum));
 	}
 
 	SECItem *newsig = malloc(sizeof (*newsig));
